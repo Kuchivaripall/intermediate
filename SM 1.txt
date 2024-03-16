@@ -1,0 +1,38 @@
+import random
+import time
+
+class SmartCradle:
+    def __init__(self):
+        self.temperature = 0
+        self.humidity = 0
+        self.crying = False
+        self.video_feed = ""
+
+    def measure_environment(self):
+        # Simulate measuring temperature and humidity
+        self.temperature = random.uniform(18, 25)
+        self.humidity = random.uniform(40, 60)
+
+    def detect_crying(self):
+        # Simulate crying detection
+        self.crying = random.choice([True, False])
+
+    def capture_video_feed(self):
+        # Simulate capturing live video feed
+        self.video_feed = "https://example.com/live_video_feed"
+
+    def display_info(self):
+        print("Temperature:", self.temperature)
+        print("Humidity:", self.humidity)
+        print("Crying:", "Yes" if self.crying else "No")
+        print("Video Feed:", self.video_feed)
+
+# Instantiate Smart Cradle
+smart_cradle = SmartCradle()
+
+while True:
+    smart_cradle.measure_environment()
+    smart_cradle.detect_crying()
+    smart_cradle.capture_video_feed()
+    smart_cradle.display_info()
+    time.sleep(5)  # Repeat every 5 seconds

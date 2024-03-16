@@ -1,0 +1,60 @@
+import random
+import time
+
+class TrafficSensor:
+    def __init__(self, location):
+        self.location = location
+        self.vehicle_count = 0
+
+    def detect_vehicle(self):
+        # Simulate vehicle detection
+        return random.randint(0, 1)
+
+    def report_status(self):
+        return {
+            "location": self.location,
+            "vehicle_count": self.vehicle_count
+        }
+
+class EmergencyVehicle:
+    def __init__(self, vehicle_type):
+        self.vehicle_type = vehicle_type
+
+    def notify_traffic_management_system(self):
+        print(f"{self.vehicle_type} is approaching. Clear the way!")
+
+class TrafficManagementSystem:
+    def __init__(self, traffic_sensors):
+        self.traffic_sensors = traffic_sensors
+
+    def monitor_traffic(self):
+        for sensor in self.traffic_sensors:
+            sensor.vehicle_count = sensor.detect_vehicle()
+            print(f"Location: {sensor.location}, Vehicle Count: {sensor.vehicle_count}")
+
+    def control_traffic(self):
+        for sensor in self.traffic_sensors:
+            if sensor.vehicle_count > 0:
+                print(f"Traffic detected at {sensor.location}. Implementing traffic control measures.")
+
+    def handle_emergency(self, emergency_vehicle):
+        emergency_vehicle.notify_traffic_management_system()
+        print("Clearing traffic for emergency vehicle.")
+
+# Initialize traffic sensors
+sensor1 = TrafficSensor("Intersection 1")
+sensor2 = TrafficSensor("Intersection 2")
+sensors = [sensor1, sensor2]
+
+# Initialize traffic management system
+traffic_system = TrafficManagementSystem(sensors)
+
+# Simulation loop
+while True:
+    traffic_system.monitor_traffic()
+    traffic_system.control_traffic()
+    # Simulate emergency scenario
+    if random.random() < 0.05:  # Randomly trigger emergency scenario
+        emergency_vehicle = EmergencyVehicle("Ambulance")
+        traffic_system.handle_emergency(emergency_vehicle)
+    time.sleep(5)  # Repeat every 5 seconds
